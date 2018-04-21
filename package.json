@@ -1,0 +1,23 @@
+{
+  "name": "piratejs",
+  "version": "0.0.1",
+  "description": "A simple pirate game based on sockets and nodejs. ",
+  "main": "index.js",
+  "scripts": {
+	"serve": "node src/server/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MichaelLangbein/piratejs.git"
+  },
+  "author": "Michael Langbein",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MichaelLangbein/piratejs/issues"
+  },
+  "homepage": "https://github.com/MichaelLangbein/piratejs#readme",
+  "dependencies": {
+    "express": "^4.16.3",
+    "socket.io": "^2.1.0"
+  }
+}
