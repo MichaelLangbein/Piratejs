@@ -4,9 +4,10 @@
   "description": "A simple pirate game based on sockets and nodejs. ",
   "main": "index.js",
   "scripts": {
-    "serve": "node src/server/index.js",
-    "build": "npm run brwfy",
-    "brwfy": "browserify src/client/client.js -o build/script.js"
+	"all": "npm run build && npm run serve",
+    	"serve": "node src/server/index.js",
+    	"build": "npm run brwfy",
+    	"brwfy": "browserify src/client/client.js -o build/script.js"
   },
   "repository": {
     "type": "git",
