@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
 	"all": "npm run build && npm run serve",
-    	"serve": "node src/server/index.js",
+    	"serve": "node src/server/server.js",
     	"build": "npm run brwfy",
     	"brwfy": "browserify src/client/client.js -o build/script.js"
   },

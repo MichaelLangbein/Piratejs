@@ -4,16 +4,9 @@ var engine = require('./clientEngine.js');
 
 
 
-socket.on("receivedNewPlayer", function(agents) {
-	console.log("Adding new player");
+socket.on("stateUpdate", function(agents) {
 	engine.updateAgents(agents);
 });
-
-socket.on("receivedButtonPressed", function (agents) {
-	console.log("Reacting on button press");
-	engine.updateAgents(agents);
-});
-
 
 var sketch = function(p) {
 	p.setup = function () {
@@ -22,7 +15,6 @@ var sketch = function(p) {
 	};
 
 	p.draw = function () {
-		engine.update();
 		engine.draw(p);
 	};
 };

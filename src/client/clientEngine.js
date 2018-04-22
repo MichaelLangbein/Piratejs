@@ -1,22 +1,9 @@
-
-var engine = {
+var clientEngine = {
 	agents: [],
 	
-	update: function () {
-		for(var i = 0; i < agents.length; i++){
-			var agent = agents[i];
-			this.updateAgent(agent);
-		}		
-	},
-
-	updateAgent: function (agent) {
-		agent.posX += agent.velX;
-		agent.posY += agent.velY;
-	},
-
 	draw: function (p) {
-		for(var i = 0; i < agents.length; i++){
-			var agent = agents[i];
+		for(var i = 0; i < this.agents.length; i++){
+			var agent = this.agents[i];
 			this.drawAgent(p, agent);
 		}		
 	},
@@ -36,4 +23,4 @@ var engine = {
 };
 
 
-module.exports = engine;
+module.exports = clientEngine;

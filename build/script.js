@@ -80907,7 +80907,13 @@ module.exports = yeast;
 },{}],44:[function(require,module,exports){
 var p5 = require('p5');
 var socket = require('socket.io-client')('10.112.70.159:3000');
+var engine = require('./clientEngine.js');
 
+
+
+socket.on("stateUpdate", function(agents) {
+	engine.updateAgents(agents);
+});
 
 var sketch = function(p) {
 	p.setup = function () {
@@ -80915,9 +80921,39 @@ var sketch = function(p) {
 		p.background(0);
 	};
 
-	p.draw = function () {};
+	p.draw = function () {
+		engine.draw(p);
+	};
 };
 
 new p5(sketch, 'processingCanvas');
 
-},{"p5":29,"socket.io-client":33}]},{},[44]);
+},{"./clientEngine.js":45,"p5":29,"socket.io-client":33}],45:[function(require,module,exports){
+var clientEngine = {
+	agents: [],
+	
+	draw: function (p) {
+		for(var i = 0; i < this.agents.length; i++){
+			var agent = this.agents[i];
+			this.drawAgent(p, agent);
+		}		
+	},
+
+	drawAgent: function (p, agent) {
+		p.push();
+		p.translate(agent.posX, agent.posY);
+		p.rotate(agent.velX, agent.velY);
+		p.fill(agent.colR, agent.colG, agent.colB);
+		p.rect(0, 0, 30, 50);
+		p.pop();	
+	},
+
+	updateAgents: function (agents) {
+		this.agents = agents;
+	}
+};
+
+
+module.exports = clientEngine;
+
+},{}]},{},[44]);
