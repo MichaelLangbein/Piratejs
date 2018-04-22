@@ -11,13 +11,17 @@ var serverEngine = {
 	},
 
 	updateAgent: function (agent) {
-		agent.posX += Math.sin(agent.angle / 360.0) * agent.vel;
-		agent.posY += Math.cos(agent.angle / 360.0) * agent.vel;
+		agent.posX += Math.sin(agent.angle * 2.0 * Math.PI / 360.0) * agent.vel;
+		agent.posY += Math.cos(agent.angle * 2.0 * Math.PI / 360.0) * agent.vel * (-1);
 		if(agent.posX > 800) {
 			agent.posX -= 800;
+		} else if (agent.posX < 0) {
+			agent.posX += 800;
 		}
 		if(agent.posY > 600) {
 			agent.posY -= 600;
+		} else if (agent.posY < 0) {
+			agent.posY += 600;
 		}
 	},
 
@@ -30,8 +34,8 @@ var serverEngine = {
 
 	onDisconnect: function (io, socket) {
 		var id = socket.id;
-		var ship = this.findAgentWithId(id);
-		// todo: delete ship with this id.
+		var index = this.findAgentIndexWithId(id);
+		this.agents.splice(index, 1);
 	},
 
 	onKeyPressed: function (io, socket, data) {
@@ -44,6 +48,14 @@ var serverEngine = {
 		return this.agents.find(function(agent){
 			return agent.id = id;
 		});
+	}, 
+
+	findAgentIndexWithId: function (id) {
+		for (var i = 0; i < this.agents.length; i++) {
+			if (this.agents[i].id == id) {
+				return i;
+			}
+		}
 	}
 };
 
