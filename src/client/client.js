@@ -12,18 +12,19 @@ var sketch = function(p) {
 	p.angleMode(p.DEGREES);
 
 	p.setup = function () {
-		p.createCanvas(400, 400);
+		p.createCanvas(800, 800);
 		p.background(0);
 	};
 
 	p.draw = function () {
+		if(p.keyIsDown(p.LEFT_ARROW)) {
+			socket.emit("keyPressed", {keyCode: "LEFT_ARROW"});
+		}else if (p.keyIsDown(p.RIGHT_ARROW)) {
+			socket.emit("keyPressed", {keyCode: "RIGHT_ARROW"});
+		}
 		engine.draw(p);
 	};
 
-	p.keyPressed = function () {
-		console.log("Now emitting keyPressed: " + p.keyCode);
-		socket.emit("keyPressed", {keyCode: p.keyCode});
-	};
 };
 
 new p5(sketch, 'processingCanvas');

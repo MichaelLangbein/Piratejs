@@ -11,13 +11,13 @@ var serverEngine = {
 	},
 
 	updateAgent: function (agent) {
-		agent.posX += agent.velX;
-		agent.posY += agent.velY;
-		if(agent.posX > 400) {
-			agent.posX -= 400;
+		agent.posX += Math.sin(agent.angle / 360.0) * agent.vel;
+		agent.posY += Math.cos(agent.angle / 360.0) * agent.vel;
+		if(agent.posX > 800) {
+			agent.posX -= 800;
 		}
-		if(agent.posY > 400) {
-			agent.posY -= 400;
+		if(agent.posY > 800) {
+			agent.posY -= 800;
 		}
 	},
 
