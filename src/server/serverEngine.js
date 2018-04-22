@@ -16,8 +16,8 @@ var serverEngine = {
 		if(agent.posX > 800) {
 			agent.posX -= 800;
 		}
-		if(agent.posY > 800) {
-			agent.posY -= 800;
+		if(agent.posY > 600) {
+			agent.posY -= 600;
 		}
 	},
 
@@ -30,6 +30,7 @@ var serverEngine = {
 
 	onDisconnect: function (io, socket) {
 		var id = socket.id;
+		var ship = this.findAgentWithId(id);
 		// todo: delete ship with this id.
 	},
 

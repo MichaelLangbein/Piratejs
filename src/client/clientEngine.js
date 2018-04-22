@@ -12,8 +12,9 @@ var clientEngine = {
 	drawAgent: function (p, agent) {
 		p.push();
 		p.translate(agent.posX, agent.posY);
-		p.rotate(agent.angle);
+		p.rotate(agent.angle + 315);
 		p.fill(agent.colR, agent.colG, agent.colB);
+		p.rectMode(p.CENTER);
 		p.rect(0, 0, 30, 50);
 		p.pop();	
 	},

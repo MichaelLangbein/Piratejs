@@ -1,5 +1,5 @@
 var p5 = require('p5');
-var socket = require('socket.io-client')('10.112.70.159:3000');
+var socket = require('socket.io-client')('localhost:3000');
 var engine = require('./clientEngine.js');
 
 
@@ -12,7 +12,7 @@ var sketch = function(p) {
 	p.angleMode(p.DEGREES);
 
 	p.setup = function () {
-		p.createCanvas(800, 800);
+		p.createCanvas(800, 600);
 		p.background(0);
 	};
 

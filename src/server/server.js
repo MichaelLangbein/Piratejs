@@ -5,7 +5,7 @@ var engine = require('./serverEngine.js');
 
 
 app.get('/', function(req, res) {
-	res.sendFile(__dirname + '/index.html');
+	res.sendFile(__dirname + '/../../build/index.html');
 });
 
 http.listen(3000, function () {
@@ -32,4 +32,4 @@ var gameLoop = function () {
 	io.emit('stateUpdate', engine.agents);
 };
 
-setInterval(gameLoop, 100);
+setInterval(gameLoop, 60);
