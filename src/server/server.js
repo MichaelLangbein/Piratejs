@@ -13,9 +13,19 @@ http.listen(3000, function () {
 });
 
 io.on('connection', function(socket) {
+	console.log("Socket received connection");
 	engine.onConnection(io, socket);
-});
 
+	socket.on("keyPressed", function(data) {
+		console.log("Socket received keyPressed event");
+		engine.onKeyPressed(io, socket, data);
+	});
+
+	socket.on("disconnect", function() {
+		console.log("Socket received disconnect event");
+		engine.onDisconnect(io, socket);
+	});
+});
 
 var gameLoop = function () {
 	engine.update();

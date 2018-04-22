@@ -80916,6 +80916,8 @@ socket.on("stateUpdate", function(agents) {
 });
 
 var sketch = function(p) {
+	p.angleMode(p.DEGREES);
+
 	p.setup = function () {
 		p.createCanvas(400, 400);
 		p.background(0);
@@ -80923,6 +80925,11 @@ var sketch = function(p) {
 
 	p.draw = function () {
 		engine.draw(p);
+	};
+
+	p.keyPressed = function () {
+		console.log("Now emitting keyPressed: " + p.keyCode);
+		socket.emit("keyPressed", {keyCode: p.keyCode});
 	};
 };
 
@@ -80933,6 +80940,7 @@ var clientEngine = {
 	agents: [],
 	
 	draw: function (p) {
+		p.background(0);
 		for(var i = 0; i < this.agents.length; i++){
 			var agent = this.agents[i];
 			this.drawAgent(p, agent);
@@ -80942,7 +80950,7 @@ var clientEngine = {
 	drawAgent: function (p, agent) {
 		p.push();
 		p.translate(agent.posX, agent.posY);
-		p.rotate(agent.velX, agent.velY);
+		p.rotate(agent.angle);
 		p.fill(agent.colR, agent.colG, agent.colB);
 		p.rect(0, 0, 30, 50);
 		p.pop();	

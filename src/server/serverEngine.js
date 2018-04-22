@@ -13,6 +13,12 @@ var serverEngine = {
 	updateAgent: function (agent) {
 		agent.posX += agent.velX;
 		agent.posY += agent.velY;
+		if(agent.posX > 400) {
+			agent.posX -= 400;
+		}
+		if(agent.posY > 400) {
+			agent.posY -= 400;
+		}
 	},
 
 
@@ -27,9 +33,17 @@ var serverEngine = {
 		// todo: delete ship with this id.
 	},
 
-	onButtonPressed: function (io, socket) {},
+	onKeyPressed: function (io, socket, data) {
+		var id = socket.id;
+		var agent = this.findAgentWithId(id);
+		agent.handleKeyPress(data);
+	},
 
-
+	findAgentWithId: function (id) {
+		return this.agents.find(function(agent){
+			return agent.id = id;
+		});
+	}
 };
 
 module.exports = serverEngine;

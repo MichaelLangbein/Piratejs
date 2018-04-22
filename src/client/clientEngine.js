@@ -2,6 +2,7 @@ var clientEngine = {
 	agents: [],
 	
 	draw: function (p) {
+		p.background(0);
 		for(var i = 0; i < this.agents.length; i++){
 			var agent = this.agents[i];
 			this.drawAgent(p, agent);
@@ -11,7 +12,7 @@ var clientEngine = {
 	drawAgent: function (p, agent) {
 		p.push();
 		p.translate(agent.posX, agent.posY);
-		p.rotate(agent.velX, agent.velY);
+		p.rotate(agent.angle);
 		p.fill(agent.colR, agent.colG, agent.colB);
 		p.rect(0, 0, 30, 50);
 		p.pop();	
