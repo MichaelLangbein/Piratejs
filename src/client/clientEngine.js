@@ -15,7 +15,8 @@ var clientEngine = {
 		p.rotate(agent.angle);
 		p.fill(agent.colR, agent.colG, agent.colB);
 		p.rectMode(p.CENTER);
-		p.rect(0, 0, 30, 50);
+		if (agent.type == "Ship") p.rect(0, 0, 30, 50);
+		else if (agent.type == "Ball") p.ellipse(0, 0, 7, 7);
 		p.pop();	
 	},
 

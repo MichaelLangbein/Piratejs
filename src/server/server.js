@@ -17,7 +17,6 @@ io.on('connection', function(socket) {
 	engine.onConnection(io, socket);
 
 	socket.on("keyPressed", function(data) {
-		console.log("Socket received keyPressed event");
 		engine.onKeyPressed(io, socket, data);
 	});
 

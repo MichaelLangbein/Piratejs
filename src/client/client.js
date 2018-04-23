@@ -19,9 +19,14 @@ var sketch = function(p) {
 	p.draw = function () {
 		if(p.keyIsDown(p.LEFT_ARROW)) {
 			socket.emit("keyPressed", {keyCode: "LEFT_ARROW"});
-		}else if (p.keyIsDown(p.RIGHT_ARROW)) {
+		} else if (p.keyIsDown(p.RIGHT_ARROW)) {
 			socket.emit("keyPressed", {keyCode: "RIGHT_ARROW"});
+		} else if (p.keyIsDown(p.UP_ARROW)) {
+			socket.emit("keyPressed", {keyCode: "UP_ARROW"});
+		} else if (p.keyIsDown(p.DOWN_ARROW)) {
+			socket.emit("keyPressed", {keyCode: "DOWN_ARROW"});
 		}
+
 		engine.draw(p);
 	};
 
