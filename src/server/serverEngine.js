@@ -1,5 +1,5 @@
 var Ship = require('./Ship.js');
-var Ball = require('./Ball.js');
+
 
 var serverEngine = {
 	agents: [],
@@ -7,33 +7,9 @@ var serverEngine = {
 	update: function () {
 		for(var i = 0; i < this.agents.length; i++){
 			var agent = this.agents[i];
-			this.moveAgent(agent);
-			this.updateCounters(agent);
+			agent.update();	
 		}
 		this.agents = this.filter(this.agents);	
-	},
-
-	moveAgent: function (agent) {
-		agent.posX += Math.sin(agent.angle * 2.0 * Math.PI / 360.0) * agent.vel;
-		agent.posY -= Math.cos(agent.angle * 2.0 * Math.PI / 360.0) * agent.vel;
-		if(agent.posX > 800) {
-			agent.posX -= 800;
-		} else if (agent.posX < 0) {
-			agent.posX += 800;
-		}
-		if(agent.posY > 600) {
-			agent.posY -= 600;
-		} else if (agent.posY < 0) {
-			agent.posY += 600;
-		}
-	},
-	
-	updateCounters: function (agent) {
-		if (agent.type == "Ball") {
-			if (agent.ttl > 0) agent.ttl -= 1;
-		} else if (agent.type == "Ship") {
-			if (agent.gunCooldown >= 0) agent.gunCooldown -= 1;
-		}
 	},
 
 	filter: function (agents) {
@@ -70,16 +46,12 @@ var serverEngine = {
 				ship.angle += 1;
 				break;
 			case "UP_ARROW":
-				if(ship.gunCooldown <= 0) {
-					this.agents.push(new Ball(ship, "starboard"));
-					ship.gunCooldown = 10;
-				}
+				var ball = ship.shoot("starboard");
+				if(ball) this.agents.push(ball);
 				break;
 			case "DOWN_ARROW": 
-				if(ship.gunCooldown <= 0) {
-					this.agents.push(new Ball(ship, "larboard"));
-					ship.gunCooldown = 10;
-				}
+				var ball = ship.shoot("larboard");
+				if(ball) this.agents.push(ball);
 				break;
 			default:
 				break;
