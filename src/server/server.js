@@ -1,7 +1,13 @@
-var app = require('express')();
+// https://stackoverflow.com/questions/15601703/difference-between-app-use-and-app-get-in-express-js 
+// https://stackoverflow.com/questions/35799699/what-is-the-rule-for-express-static-root-path
+
+
+var express = require('express');
+var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var engine = require('./serverEngine.js');
+
 
 
 app.get('/', function(req, res) {
