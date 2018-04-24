@@ -39,7 +39,7 @@ var Ship = function (id) {
 	};
 
 	this.canShoot = function () {
-		return this.gunCooldown <= 0;
+		return (this.gunCooldown <= 0);
 	};
 
 	this.shoot = function (direction) {
@@ -49,6 +49,7 @@ var Ship = function (id) {
 			var ballX = this.posX + Math.sin(ballAngle) * 20 * dir;
 			var ballY = this.posY - Math.cos(ballAngle) * 20 * dir;
 			var ball = new Ball(ballX, ballY, ballAngle);
+			this.gunCooldown = 10;
 			return ball;
 		}
 		return false;
