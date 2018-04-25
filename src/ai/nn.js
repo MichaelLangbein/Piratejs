@@ -6,18 +6,10 @@ var neuron = function () {
 
 var nn = function (shape) {
 	
-	this.layers = [];
 	this.weights = [];
-
-	for(var l = 0; l < shape.length; l++) {
-		var count = shape[l];
-		var layer = [];
-		for(var n = 0; n < count; n++) {
-			layer.push(new neuron());
-		}
-		this.layers.push(layer);
-	}
-
+	this.layers = [];
+	
+	// weights: between 0 and 1, 1 and 2, ...
 	for(var l = 1; l < shape.length; l++) {
 		var count0 = shape[l-1];
 		var count1 = shape[l];
@@ -31,11 +23,21 @@ var nn = function (shape) {
 		this.weights.push(weight);
 	}
 
+	// layers: none on level 0.
+	for(var l = 1; l < shape.length; l++) {
+		var count = shape[l];
+		var layer = [];
+		for(var n = 0; n < count; n++) {
+			layer.push(new neuron());
+		}
+		this.layers.push(layer);
+	}
+
 	this.evaluate = function (input) {
-		var output = [];
 		for(var l = 0; l < this.layers.length - 1; l++) {
-			output = this.evaluateOnNeurons(input, this.layers[l]);
-			input = this.transmitThroughWeights(output, this.weights[l]);
+			var weighted = this.transmitThroughWeights(input, this.weights[l]);
+			var output = this.evaluateOnNeurons(weighted, this.layers[l]);
+			input = output;
 		}
 		return output;
 	};
@@ -55,7 +57,7 @@ var nn = function (shape) {
 			var sum = 0;
 			for(var c = 0; c < weights[r].length; c++){
 				sum += input[r] * weights[r][c];
-			}		
+			}
 			output.push(sum);
 		}
 		return output;
