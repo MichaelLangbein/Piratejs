@@ -1,6 +1,6 @@
 var neuron = function () {
 	this.evaluate = function (input) {
-		return 1.0 / (1.0 + Math.exp(input));
+		return 1.0 / (1.0 + Math.exp(-input));
 	};
 };
 
@@ -56,7 +56,7 @@ var nn = function (shape) {
 		for(var r = 0; r < input.length; r++){
 			var sum = 0;
 			for(var c = 0; c < weights[r].length; c++){
-				sum += input[r] * weights[r][c];
+				sum += input[c] * weights[r][c];
 			}
 			output.push(sum);
 		}
