@@ -16,6 +16,8 @@ http.listen(3000, function () {
 	console.log('listening on port 3000');
 });
 
+engine.onStartup();
+
 io.on('connection', function(socket) {
 	console.log("Socket received connection");
 	engine.onConnection(io, socket);

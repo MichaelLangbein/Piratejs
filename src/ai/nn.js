@@ -4,7 +4,7 @@ var neuron = function () {
 	};
 };
 
-var nn = function (shape) {
+var NN = function (shape) {
 	
 	this.weights = [];
 	this.layers = [];
@@ -64,4 +64,4 @@ var nn = function (shape) {
 	};
 };
 
-module.exports = nn;
+module.exports = NN;

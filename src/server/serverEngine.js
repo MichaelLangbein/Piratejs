@@ -1,4 +1,5 @@
 var Ship = require('./Ship.js');
+var AiShip = require('../ai/AiShip.js');
 
 
 var serverEngine = {
@@ -21,6 +22,11 @@ var serverEngine = {
 			}
 			return true;
 		});
+	},
+
+	onStartup: function() {
+		var aiShip = new AiShip(this);
+		this.agents.push(aiShip);
 	},
 
 	onConnection: function (io, socket) {
