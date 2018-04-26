@@ -36,7 +36,7 @@ var AiShip = function (engine) {
 	this.think = function () {
 		var ne = this.eyes.findNearestEnemy();
 		var results = this.brain.evaluate([this.posX, this.posY, this.angle, this.speed, ne.posX, ne.posY, ne.angle, ne.speed]);
-		return results.indexOf( Math.max(...results) );
+		return results.indexOf( Math.max.apply(Math, results) );
 	};
 
 	this.takeAction = function (result) {
